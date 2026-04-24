@@ -1,38 +1,38 @@
 pipeline {
     agent any
-stages {
-    stage ('clone') {
-        steps {
-            git branch:'master' , url:'https://github.com/ali9538/Amazon3.git'
+    stages {
+        stage ('clone') {
+            steps {
+                git branch:'master', url:'https://github.com/ali9538/Amazon3.git'
+            }
+        }
+        stage ('compile') {
+            steps {
+                dir ('Amazon') {
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+        stage ('test') {
+            steps {
+                dir ('Amazon') {
+                    sh "mvn test"
+                }
+            }
+        }
+        stage ('clean') {
+            steps {
+                dir ('Amazon') {
+                    sh 'mvn clean'
+                }
+            }
+        }
+        stage ('deploy') {
+            steps {
+                dir ('Amazon') {
+                    sh 'mvn clean install'
+                }
+            }
         }
     }
-    stage ('compile') {
-        steps {
-            dir ('Amazon') {
-            sh 'mvn clean compile'
-        }
-    }
-    }
-    stage ('test') {
-        steps {
-            dir ('Amazon') {
-            sh "mvn test"
-        }
-    }
-    }
-    stage ('clean') {
-        steps {
-            dir ('Amazon') {
-            sh 'mvn clean'
-        }
-    }
-    }
-    stage ('deploy') {
-        steps {
-            dir ('Amazon') {
-            sh 'mvn clean install'
-        }
-    }
-    }
-}
 }
