@@ -3,7 +3,7 @@ pipeline {
 stages {
     stage ('clone') {
         steps {
-            git branch:'master' , url:'https://github.com/ali9538/Amazon3.git'
+            git branch:'master' , url:'https://github.com/PraveenKuberABC/Amazon3.git'
         }
     }
     stage ('compile') {
